@@ -4,8 +4,7 @@ import style from "./QuestionSection.module.css";
 import fetchData from "../../api";
 
 import FilterList from "../FilterList";
-
-const searchParams = new URLSearchParams(new URL(window.location.href).search);
+import getSearchParams from "../../utils";
 
 function QuestionsSection() {
   const [questions, setQuestions] = useState([]);
@@ -47,7 +46,7 @@ function QuestionsSection() {
   function getParamsFromUrl() {
     let data = {};
 
-    for (let value of searchParams) {
+    for (let value of getSearchParams()) {
       if (value[0] === "co" || value[0] === "pos") {
         value[1] = value[1].split(",");
       }
