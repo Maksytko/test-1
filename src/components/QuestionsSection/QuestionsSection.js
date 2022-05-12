@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
+import style from "./QuestionSection.module.css";
 
 import fetchData from "../../api";
 
 import FilterList from "../FilterList";
-import ResetButton from "../ResetButton";
 
 const searchParams = new URLSearchParams(new URL(window.location.href).search);
 
@@ -57,11 +57,11 @@ function QuestionsSection() {
   }
 
   function checkPositions(filterPos, questionPos) {
-    return filterPos?.every((pos) => questionPos.includes(pos));
+    return filterPos?.some((pos) => questionPos.includes(pos));
   }
 
   function checkCompanies(filterCo, questionCo) {
-    return filterCo?.every((co) => questionCo.includes(co));
+    return filterCo?.some((co) => questionCo.includes(co));
   }
 
   return (
@@ -69,12 +69,13 @@ function QuestionsSection() {
       {filter && <FilterList filter={filter} />}
       {questionsForRender.length !== 0
         ? questionsForRender.map((question) => (
-            <p key={question.title}>{question.title}</p>
+            <p className={style.text} key={question.title}>
+              {question.title}
+            </p>
           ))
         : questions.map((question) => (
             <p key={question.title}>{question.title}</p>
           ))}
-      <ResetButton />
     </>
   );
 }

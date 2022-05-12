@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import FilterListItem from "../FilterListItem";
+import style from "./FilterList.module.css";
+
+import ResetButton from "../ResetButton";
 
 function FilterList({ filter }) {
   const [items, setItems] = useState([]);
@@ -20,11 +22,16 @@ function FilterList({ filter }) {
   return (
     <>
       {items.length !== 0 && (
-        <ul>
-          {items.map((item) => (
-            <FilterListItem text={item} key={item} />
-          ))}
-        </ul>
+        <>
+          <ul className={style.list}>
+            {items.map((item) => (
+              <li className={style.item} key={item}>
+                <p className={style.text}>{item}</p>
+              </li>
+            ))}
+          </ul>
+          <ResetButton />
+        </>
       )}
     </>
   );
